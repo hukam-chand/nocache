@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "NoCache",
+  "description": "This extension adds a unique “nocache” query parameter with a random hash to the current page URL, ensuring a fresh reload every time. It’s designed for developers and testers who need to bypass cached content quickly. Click the icon to instantly force the browser to load the latest version of any page.",
+  "version": "1.0",
+  "action": {
+    "default_title": "NoCache",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "commands": {
+    "toggle-nocache": {
+      "suggested_key": {
+        "default": "Alt+Shift+C",
+        "mac": "Alt+Shift+C"
+      },
+      "description": "Add nocache parameter to current URL"
+    }
+  }
+}
