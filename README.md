@@ -7,6 +7,7 @@
 - **Instant Cache Busting**: Click the toolbar icon to immediately reload the page with a unique query parameter.
 - **Customizable Parameter**: Change the query parameter name (e.g., `timestamp`, `v`) via the Options page.
 - **Keyboard Shortcut**: Use `Alt+Shift+C` (Mac/Windows) to trigger the extension without lifting your hands from the keyboard.
+- **Context Menu**: Right-click any page and select "Open in Private Window" to open the current URL in an incognito window.
 - **Visual Feedback**: A brief "OK" badge appears on the icon to confirm the action.
 
 ## Installation
@@ -24,6 +25,9 @@ Click the **NoCache** icon in the Chrome toolbar. The current tab will reload wi
 
 ### Keyboard Shortcut
 Press `Alt+Shift+C` to trigger the extension. You can customize this shortcut in `chrome://extensions/shortcuts`.
+
+### Context Menu
+Right-click anywhere on a webpage and select **Open in Private Window** from the context menu. This will open the current page's URL in a new private (incognito) window.
 
 ## Configuration
 

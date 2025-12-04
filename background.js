@@ -38,3 +38,24 @@ function generateHash(length) {
   const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
   return hex.slice(0, length);
 }
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: "open-incognito",
+    title: "Open in Private Window",
+    contexts: ["page"]
+  });
+});
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === "open-incognito") {
+    // Use the pageUrl from info, or fallback to tab.url
+    const urlToOpen = info.pageUrl || tab.url;
+    if (urlToOpen) {
+      chrome.windows.create({
+        url: urlToOpen,
+        incognito: true
+      });
+    }
+  }
+});
