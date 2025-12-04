@@ -29,6 +29,12 @@ chrome.commands.onCommand.addListener((command) => {
         updateUrl(tabs[0]);
       }
     });
+  } else if (command === 'open-incognito') {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs.length > 0 && tabs[0].url) {
+        openInIncognito(tabs[0].url);
+      }
+    });
   }
 });
 
@@ -39,11 +45,21 @@ function generateHash(length) {
   return hex.slice(0, length);
 }
 
+function openInIncognito(url) {
+  if (url) {
+    chrome.windows.create({
+      url: url,
+      incognito: true
+    });
+  }
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "open-incognito",
     title: "Open in Private Window",
-    contexts: ["page"]
+    contexts: ["page"],
+    documentUrlPatterns: ["http://*/*", "https://*/*"]
   });
 });
 
@@ -51,11 +67,6 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === "open-incognito") {
     // Use the pageUrl from info, or fallback to tab.url
     const urlToOpen = info.pageUrl || tab.url;
-    if (urlToOpen) {
-      chrome.windows.create({
-        url: urlToOpen,
-        incognito: true
-      });
-    }
+    openInIncognito(urlToOpen);
   }
 });
